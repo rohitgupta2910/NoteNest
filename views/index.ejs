@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Directory Management</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body class="bg-gradient-to-br from-zinc-100 to-zinc-200 min-h-screen font-['Poppins']">
+    <nav class="bg-emerald-600 p-4 fixed top-0 w-full shadow-lg">
+        <div class="container mx-auto flex justify-between items-center">
+            <span class="text-white text-xl font-bold hover:scale-105 transition-transform duration-300">NoteNest</span>
+            <a href="/" class="text-white text-lg hover:text-emerald-200 transition-all duration-300 hover:scale-105 hover:rotate-2">Home</a>
+        </div>
+    </nav>
+    <div class="container mx-auto px-4 flex items-center justify-center min-h-screen">
+        <div class="bg-zinc-50 p-8 rounded-xl shadow-2xl w-full max-w-3xl transform hover:scale-[1.01] transition-transform duration-300 mt-16 backdrop-blur-sm bg-opacity-90">
+            <h1 class="text-3xl font-bold mb-8 text-center text-zinc-800 animate-fade-in">Directory Management</h1>
+            
+            <div class="space-y-4">
+                <% files.forEach((ele) => { %>
+                    <div class="flex items-center justify-between p-4 bg-zinc-100 rounded-lg hover:bg-zinc-200 transition-all duration-300 transform hover:scale-[1.02] hover:shadow-md">
+                        <span class="text-lg text-zinc-700 font-medium"><%= ele.name %></span>
+                        <div class="space-x-3">
+                            <form action="/viewfolder/<%= ele.name %>" method="GET" class="inline">
+                                <input type="hidden" name="name" value="<%= ele.name %>">
+                                <button type="submit" class="bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white px-4 py-2 rounded-lg transition-all duration-300 hover:shadow-lg hover:scale-105">View</button>
+                            </form>
+                            <form action="/deletefolder/<%= ele.name %>" method="get" class="inline">
+                                <input type="hidden" name="name" value="<%= ele.name %>">
+                                <button type="submit" class="bg-gradient-to-r from-red-600 to-rose-600 hover:from-red-500 hover:to-rose-500 text-white px-4 py-2 rounded-lg transition-all duration-300 hover:shadow-lg hover:scale-105">Delete</button>
+                            </form>
+                        </div>
+                    </div>
+                <% }) %>
+            </div>
+
+            <div class="mt-8">
+                <form action="/createfolder" method="POST" class="flex justify-center space-x-4">
+                    <input type="text" name="name" placeholder="New folder name" required 
+                           class="px-4 py-2 rounded-lg border-zinc-300 shadow-sm 
+                                  focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500 
+                                  transition-all duration-300 hover:shadow-md bg-zinc-50">
+                    <button type="submit" 
+                            class="px-6 py-2 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white 
+                                   bg-gradient-to-r from-emerald-600 to-teal-600 
+                                   hover:from-emerald-500 hover:to-teal-500
+                                   transform transition-all duration-300 
+                                   hover:scale-105 hover:shadow-lg 
+                                   focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-emerald-500
+                                   active:scale-95">
+                        Create Folder
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
